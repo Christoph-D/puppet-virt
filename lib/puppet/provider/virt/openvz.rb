@@ -225,14 +225,14 @@ Puppet::Type.type(:virt).provide(:openvz) do
   end
 
   def memory
-    get_value("PRIVVMPAGES").split(":")[0].to_i / 256 #MB
+    get_value("PHYSPAGES").split(":")[1].to_i / 256
   end
 
   def memory=(value)
     unless resource[:configfile] == "unlimited" #FIXME use regex for the match
-      vzctl('set', ctid, "--vmguarpages", value.to_s + "M", "--save")
-      vzctl('set', ctid, "--oomguarpages", value.to_s + "M", "--save")
-      vzctl('set', ctid, "--privvmpages", value.to_s + "M", "--save")
+      vzctl('set', ctid, "--ram", value.to_s + "M", "--save")
+    end
+  end
 
   def swap
     get_value("SWAPPAGES").split(":")[1].to_i / 256
