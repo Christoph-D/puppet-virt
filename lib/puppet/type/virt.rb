@@ -203,9 +203,9 @@ Puppet::Type.newtype(:virt) do
       desc "IP address(es) of the VE."
 
       validate do |ip|
-        unless ip =~ /^\d+\.\d+\.\d+\.\d+$/
-          raise ArgumentError, "\"#{ip}\" is not a valid IP address."
-        end
+        # unless ip =~ /^\d+\.\d+\.\d+\.\d+$/
+        #   raise ArgumentError, "\"#{ip}\" is not a valid IP address."
+        # end
       end
 
       def insync?(current)
