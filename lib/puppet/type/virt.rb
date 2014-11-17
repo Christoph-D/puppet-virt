@@ -242,6 +242,12 @@ Puppet::Type.newtype(:virt) do
       isrequired #FIXME Bug #4049
     end
 
+    newproperty(:swap, :parent => VirtNumericParam) do
+      desc "The maximum amount of swap memory for the guest domain."
+
+      isrequired #FIXME Bug #4049
+    end
+
     newproperty(:cpus, :parent => VirtNumericParam) do
       desc "Number of virtual CPUs active in the guest domain."
 

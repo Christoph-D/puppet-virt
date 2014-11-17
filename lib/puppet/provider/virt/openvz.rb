@@ -233,6 +233,14 @@ Puppet::Type.type(:virt).provide(:openvz) do
       vzctl('set', ctid, "--vmguarpages", value.to_s + "M", "--save")
       vzctl('set', ctid, "--oomguarpages", value.to_s + "M", "--save")
       vzctl('set', ctid, "--privvmpages", value.to_s + "M", "--save")
+
+  def swap
+    get_value("SWAPPAGES").split(":")[1].to_i / 256
+  end
+
+  def swap=(value)
+    unless resource[:configfile] == "unlimited" #FIXME use regex for the match
+      vzctl('set', ctid, "--swap", value.to_s + "M", "--save")
     end
   end
 
